@@ -1,10 +1,14 @@
 <script>
+  import Header from "./Header.svelte";
 </script>
 
 <svelte:head>
   <title>Game</title>
   <meta name="cover" content="cover of game" />
 </svelte:head>
+<Header>
+  <span><i class="fa-solid fa-circle-question"></i></span>
+</Header>
 
 <section>
   <div id="container">
@@ -24,8 +28,6 @@
   section {
     background-image: url("..\lib\images\cover.jpg");
   }
-
-  
 
   #title {
     width: auto;
