@@ -3,7 +3,7 @@
 	import './styles.css';
 </script>
 
-<div class="app">
+<div class="app" style="margin: 0%;padding:0%">
 	<Header />
 
 	<main>

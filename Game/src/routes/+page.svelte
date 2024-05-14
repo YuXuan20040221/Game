@@ -26,7 +26,7 @@
 
 <style>
   section {
-    background-image: url("..\lib\images\cover.jpg");
+    background-image: url("/src/lib/images/MainPage1.jpg");
   }
 
   #title {

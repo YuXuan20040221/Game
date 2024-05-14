@@ -84,7 +84,7 @@
 
 <style>
   section {
-    background-image: url("/src/lib/images/menu_bg.jpg");
+    background-image: url("/src/lib/images/MainPage2.jpg");
   }
 
   #container {

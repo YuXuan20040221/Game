@@ -19,5 +19,6 @@
 		justify-content: flex-end;
 		color: azure;
 		font-size: 20px;
+		z-index: 1;
 	}
 </style>
