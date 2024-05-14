@@ -3,5 +3,5 @@
 </script>
 
 <Header>
-    <span><a href="./" style="color: azure;"><i class="fa-solid fa-house"></i></a></span>
+    <span><a href="./" style="color: white;"><i class="fa-solid fa-house"></i></a></span>
 </Header>

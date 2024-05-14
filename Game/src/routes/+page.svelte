@@ -18,7 +18,7 @@
         <a href="/gameMenu" style="color:cornflowerblue;">遊戲選單</a>
       </div>
       <div id="game_start">
-        <a href="/gameStart" style="color:azure;">開始遊戲</a>
+        <a href="/gameEnd" style="color:white;">開始遊戲</a>
       </div>
     </div>
   </div>
@@ -26,24 +26,24 @@
 
 <style>
   section {
-    background-image: url("/src/lib/images/MainPage1.jpg");
+    background-image: url("..\lib\images\MainPage2.jpg");
   }
 
   #title {
     width: auto;
     font-size: 90px;
-    color: azure;
+    color: white;
   }
 
   #game_menu {
-    background-color: azure;
+    background-color: white;
     border-radius: 50px;
     padding: 10px;
     font-size: 20px;
   }
 
   #game_start {
-    color: azure;
+    color: white;
     background-color: cornflowerblue;
     border-radius: 50px;
     padding: 10px;

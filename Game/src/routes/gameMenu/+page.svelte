@@ -7,7 +7,7 @@
   <meta name="description" content="About this app" />
 </svelte:head>
 <Header>
-  <span><a href="./" style="color: azure;"><i class="fa-solid fa-house"></i></a></span>
+  <span><a href="./" style="color: white;"><i class="fa-solid fa-house"></i></a></span>
 </Header>
 
 <section>
@@ -84,11 +84,11 @@
 
 <style>
   section {
-    background-image: url("/src/lib/images/MainPage2.jpg");
+    background-image: url("/src/lib/images/MainPage1.jpg");
   }
 
   #container {
-    background-color: azure;
+    background-color: white;
     /* opacity: 0.8; */
     display: flex;
     flex-direction: column;

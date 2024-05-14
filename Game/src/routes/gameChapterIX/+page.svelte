@@ -23,7 +23,7 @@
         <i class="fa-solid fa-sliders"></i>
     </a>
     <div style="width: 95%;"></div>
-    <a href="./" style="color: azure;"><i class="fa-solid fa-house"></i></a>
+    <a href="./" style="color: white;"><i class="fa-solid fa-house"></i></a>
 </Header>
 
 <section>
