@@ -19,7 +19,7 @@
     <meta name="cover" content="cover of game" />
 </svelte:head>
 <Header>
-    <a href="./" style="color: azure;">
+    <a href="./" style="color: white;">
         <i class="fa-solid fa-sliders"></i>
     </a>
     <div style="width: 95%;"></div>
