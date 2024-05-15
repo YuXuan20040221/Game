@@ -20,9 +20,12 @@
 		justify-content: space-between;
 		color: white;
 		font-size: 20px;
+<<<<<<< Updated upstream
 		z-index: 1; 
 		position: absolute; 
 		top: 20px;
 		left: 20px;
+=======
+>>>>>>> Stashed changes
 	}
 </style>
