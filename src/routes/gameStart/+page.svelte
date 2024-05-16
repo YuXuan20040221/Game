@@ -5,6 +5,15 @@
         "個人為了考驗你的真實實力，在信中用了一",
         "個特別的加密方式，提示了你......",
     ];
+
+
+    function openMail(){
+        // @ts-ignore
+        document.getElementById('mail').style.display = 'block';
+        // @ts-ignore
+        document.getElementById('mask').style.display = 'block';
+
+    }
 </script>
 
 <svelte:head>
@@ -21,14 +30,17 @@
 
 <section>
     <div id="container">
+        <div id="mask"></div>
         <div class="typewriter">
             {#each text as t, i}
                 <p style="animation-delay: {i * 2}s;">{t}</p>
             {/each}
         </div>
-        <div id="lock" style="float: right; margin:5px">
-            <a href="/gameChapterIX-2" style="color:azure;">打開密信</a>
-        </div>
+        <button id="mail_but" on:click={openMail}>打開密信</button>
+        
+    </div>
+    <div id="mail">
+        <img src="/src/lib/images/P1-Mail.png" alt="this is a mail">
     </div>
 </section>
 
@@ -36,6 +48,7 @@
     #container {
         background-color: rgba(0, 0, 0, 0.6);
         padding: 60px;
+        z-index: 1;
     }
     section {
         background-image: url("/src/lib/images/P1-Paper.jpg");
@@ -48,13 +61,16 @@
         z-index: -1;
     }
 
-    #lock {
+    #mail_but {
         color: azure;
         background-color: cornflowerblue;
         border-radius: 50px;
-        width: 80px;
-        padding: 10px;
+        /* width: 80px; */
+        padding: 7px 5px;
         font-size: 20px;
+        float: right; 
+        margin: 5px;
+        outline: none;
     }
 
     .typewriter p {
@@ -68,6 +84,24 @@
         animation:
             typing 2s steps(40, end),
             appear 1s forwards;
+    }
+
+    #mask{
+        display: none;
+        background-color: rgba(0, 0, 0, 0.634);
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 2;
+    }
+
+    #mail{
+        display: none;
+        position: absolute;
+        margin: auto;
+        z-index: 3;
     }
 
     /* The typing effect */
