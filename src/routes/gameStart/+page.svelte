@@ -3,16 +3,33 @@
     const text = [
         "某日，你收到了一封密信，隱藏在背後的那",
         "個人為了考驗你的真實實力，在信中用了一",
-        "個特別的加密方式，提示了你......",
+        "個特別的加密方式，似乎是在指引了一個神",
+        "秘寶藏的埋藏地點......"
     ];
 
+    const mail_text = [
+        "樺樹林裡無木，",
+        "木在田中，",
+        "閒人窗紗掩月，",
+        "取刀一剪。"
+    ]
+
+    var input = "";
 
     function openMail(){
         // @ts-ignore
         document.getElementById('mail').style.display = 'block';
         // @ts-ignore
         document.getElementById('mask').style.display = 'block';
+    }
 
+    function commit(){
+        if(input != "華東門前"){
+            alert("答案錯誤!");
+        }
+        else{
+            window.location.href = "/gameStart-2";
+        }
     }
 </script>
 
@@ -40,7 +57,17 @@
         
     </div>
     <div id="mail">
-        <img src="/src/lib/images/P1-Mail.png" alt="this is a mail">
+        <div id="mail_container">
+            <div id="mail_text">
+                {#each mail_text as t}
+                    <p>{t}</p>
+                {/each}
+            </div>
+            <div style="display: flex;">
+                <input id="ans" placeholder="請輸入地點" bind:value={input}>
+                <button on:click={commit}>確定</button>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -88,20 +115,50 @@
 
     #mask{
         display: none;
-        background-color: rgba(0, 0, 0, 0.634);
+        background-color: rgba(0, 0, 0, 0.6);
         width: 100vw;
         height: 100vh;
         position: absolute;
         top: 0;
         left: 0;
         z-index: 2;
+        
     }
 
     #mail{
         display: none;
         position: absolute;
-        margin: auto;
         z-index: 3;
+        width: 29%;
+        height: 75%;
+        background-repeat: no-repeat;
+        background-image: url("src/lib/images/P5-Mail.png");
+    }
+
+    #mail_text{
+        /* position: relative; */
+        /* top: 150px;
+        left: 90px; */
+        font-size: 25px;
+        font-weight: bold;
+        color: rgba(4, 3, 0, 0.738);
+        writing-mode: vertical-rl;   
+    }
+
+    #mail_container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100%;
+        justify-content: center;
+    }
+
+    #mail_container input{
+        position: relative;
+        top: 50px;
+        border: transparent;
+        border-radius: 10px;
+        padding: 10px;
     }
 
     /* The typing effect */
