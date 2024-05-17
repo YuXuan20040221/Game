@@ -59,7 +59,7 @@
                 {mail_text}
             </div>
             <div>
-                <button on:click={closeMail}>收起密信</button>
+                <button on:click={closeMail}>前往躲藏地</button>
             </div>
         </div>
     </div>
