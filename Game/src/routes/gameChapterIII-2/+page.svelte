@@ -15,10 +15,7 @@
 
   function checkAns() {
     if (count[0] == 0 && count[1] == 1 && count[2] == 1) {
-      // @ts-ignore
-      document.getElementById("next").style.display = "block";
-      // @ts-ignore
-      document.getElementById("allContainer").style.display = "none";
+      window.location.href = "/gameChapterIII-3";
     } else {
       alert("答錯了QQ");
     }
@@ -26,14 +23,13 @@
 </script>
 
 <Header>
-  <span>
-    <a href="./" style="color: white;">
-      <i class="fa-solid fa-sliders"></i>
-    </a>
-    <a href="./" style="color: white;">
-      <i class="fa-solid fa-house"></i>
-    </a>
-  </span>
+  <a href="/gameMenu" style="color: white;">
+    <i class="fa-solid fa-sliders"></i>
+  </a>
+  <div style="width: 95%;"></div>
+  <a href="./" style="color: white;">
+    <i class="fa-solid fa-house"></i>
+  </a>
 </Header>
 
 <section>
@@ -60,7 +56,6 @@
     >
   </div>
 
-  <a id="next" href="./gameChapterIX">下一關</a>
 </section>
 
 <style>
@@ -98,14 +93,5 @@
     font-size: 70px;
     position: absolute;
     top: 503px;
-  }
-
-  #next {
-    display: none;
-    background-color: lightgoldenrodyellow;
-    /* color: gold; */
-    border-radius: 5px;
-    font-size: 20px;
-    padding: 10px;
   }
 </style>

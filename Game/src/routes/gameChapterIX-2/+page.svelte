@@ -25,12 +25,7 @@
         }
         if (A == false) alert("答案錯誤");
         else {
-            // @ts-ignore
-            document.getElementById("Game").style.display = "none";
-            // @ts-ignore
-            document.getElementById("lock").style.display = "none";
-            // @ts-ignore
-            document.getElementById("next").style.display = "block";
+            window.location.href = "/gameChapterIX-3";
         }
     }
 </script>
@@ -40,7 +35,7 @@
     <meta name="cover" content="cover of game" />
 </svelte:head>
 <Header>
-    <a href="./" style="color: azure;">
+    <a href="/gameMenu" style="color: azure;">
         <i class="fa-solid fa-sliders"></i>
     </a>
     <div style="width: 95%;"></div>
@@ -57,12 +52,6 @@
             開鎖
         </button>
     </div>
-    <a
-        href="/gameChapterX"
-        id="next"
-        class="lock"
-        style="display: none;color:azure;text-align:center">下一關</a
-    >
 </section>
 
 <style>
