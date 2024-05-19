@@ -133,7 +133,6 @@
         font-size: 15px;
         font-weight: bold;
         color: rgba(4, 3, 0, 0.488); 
-
     }
 
     #mail_container{
