@@ -42,10 +42,27 @@
 
 <section>
     <div id="container">
-       <h1>hhh</h1>
+        <div id="mask"></div>
+        <div class="typewriter">
+            {#each text as t, i}
+                <p style="animation-delay: {i * 2}s;">
+                    {t}
+                </p>
+            {/each}
+        </div>
+        <button id="mail_but" on:click={openMail}>再次查看密信</button>
         
     </div>
- 
+    <div id="mail">
+        <div id="mail_container">
+            <div id="mail_text">
+                {mail_text}
+            </div>
+            <div>
+                <button on:click={closeMail}>前往躲藏地</button>
+            </div>
+        </div>
+    </div>
 </section>
 
 <style>
