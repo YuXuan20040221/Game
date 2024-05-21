@@ -13,8 +13,13 @@
 
     var input = "";
 
-    var mail_text = "村中無水，皆往古月旁汲，日夜不停";
-
+    var mail_text = [
+        "村中無水，皆往古月旁汲，日夜不停",
+        "春日遊，百花盛開，蝴蝶飛舞",
+        "你生的如此高大，是否會感到不便?",
+        "願與君共享今宵月色"
+    ]
+    
     function openMail(){
         // @ts-ignore
         document.getElementById('mail').style.display = 'block';

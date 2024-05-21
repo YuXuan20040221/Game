@@ -7,11 +7,12 @@
         "秘寶藏的埋藏地點......"
     ];
 
+    let random = Math.floor(Math.random() * 4) + 1;
     const mail_text = [
-        "樺樹林裡無木，",
-        "木在田中，",
-        "閒人窗紗掩月，",
-        "取刀一剪。"
+        {t: ["樺樹林裡無木，", "木在田中，", "閒人窗紗掩月，", "取刀一剪。"], ans: "華東門前"},
+        {t: ["冬月江畔鳥翩躚，", "士兵途經寸難移。"], ans: "青鴻寺"},
+        {t: ["雨後山水昏如睡，", "明日鬱結盼出走，", "門中俠客帽欲摘，", "放眼天地任遨遊。"], ans: "雪月閣"},
+        {t: ["牛角上綁刀，", "離人心上秋燈閃閃人兒不見，", "悶昏昏笑話無心"], ans: "解愁門"}
     ]
 
     var input = "";
@@ -24,7 +25,7 @@
     }
 
     function commit(){
-        if(input != "華東門前"){
+        if(input != mail_text[random].ans){
             alert("答案錯誤!");
         }
         else{
@@ -59,7 +60,7 @@
     <div id="mail">
         <div id="mail_container">
             <div id="mail_text">
-                {#each mail_text as t}
+                {#each mail_text[random].t as t}
                     <p>{t}</p>
                 {/each}
             </div>

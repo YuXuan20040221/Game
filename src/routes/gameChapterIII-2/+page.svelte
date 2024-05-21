@@ -1,13 +1,19 @@
 <script>
   import Header from "../Header.svelte";
 
-  const text1 = ["割", "節", "施"];
-  const text2 = ["水", "蛙", "土"];
-  const text3 = ["哥", "瓜", "想"];
+  let random = Math.floor(Math.random() * 4) + 1;
+  const text = [
+    {t1: ["割", "節", "施"], t2: ["水", "蛙", "土"], t3: ["哥", "瓜", "想"], src: "/src/lib/images/P3-frog.jpg"},
+    {t1: ["喝", "節", "施"], t2: ["水", "我", "土"], t3: ["哥", "火", "想"], src: "/src/lib/images/P3-Flower.jpg"},
+    {t1: ["住", "節", "施"], t2: ["水", "願", "土"], t3: ["哥", "站", "想"], src: "/src/lib/images/P3-Flower.jpg"},
+    {t1: ["呼", "節", "施"], t2: ["水", "陶", "土"], t3: ["哥", "豪", "想"], src: "/src/lib/images/P3-Flower.jpg"}
+];
+
+  const text1 = text[random].t1;
+  const text2 = text[random].t2;
+  const text3 = text[random].t3;
   let count = [0, 0, 0];
-
-  //   const ans = ["割", "蛙", "瓜"];
-
+  
   // @ts-ignore
   function change(i) {
     count[i] = (count[i] + 1) % 3;
@@ -17,9 +23,11 @@
     if (count[0] == 0 && count[1] == 1 && count[2] == 1) {
       window.location.href = "/gameChapterIII-3";
     } else {
-      alert("答錯了QQ");
+      alert("答錯了");
     }
   }
+
+  
 </script>
 
 <Header>
@@ -35,8 +43,8 @@
 <section>
   <div id="allContainer">
     <div id="container">
-      <div>
-        <img src="/src/lib/images/P3-frog.jpg" alt="question" />
+      <div style="padding: 10px;">
+        <img src={text[random].src} alt="question" style="width: 259px;"/>
       </div>
 
       <div id="lockerImg">
