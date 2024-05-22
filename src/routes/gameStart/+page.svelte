@@ -1,5 +1,7 @@
 <script>
     import Header from "../Header.svelte";
+    import Information from "../Information.svelte";
+
     const text = [
         "某日，你收到了一封密信，隱藏在背後的那",
         "個人為了考驗你的真實實力，在信中用了一",
@@ -13,6 +15,13 @@
         "閒人窗紗掩月，",
         "取刀一剪。"
     ]
+
+    const info = {
+    text: [
+      "密碼學：析字法",
+      "解密：在信中只有幾個字，要拆解字的意思(eg.青=十二月)",
+    ],
+  };
 
     var input = "";
 
@@ -42,12 +51,21 @@
         <i class="fa-solid fa-sliders"></i>
     </a>
     <div style="width: 95%;"></div>
+    <a
+    style="color: white;"
+    on:click={() => {
+      // @ts-ignore
+      document.getElementById("info").style.display = "block";
+    }}
+  >
+    <i class="fa-solid fa-circle-question"></i>
+  </a>
     <a href="./" style="color: azure;"><i class="fa-solid fa-house"></i></a>
 </Header>
 
 <section>
     <div id="container">
-        <div id="mask"></div>
+        <div id="mask_bg"></div>
         <div class="typewriter">
             {#each text as t, i}
                 <p style="animation-delay: {i * 2}s;">{t}</p>
@@ -69,6 +87,9 @@
             </div>
         </div>
     </div>
+    <div id="info">
+        <Information {...info} />
+      </div>
 </section>
 
 <style>
@@ -113,7 +134,7 @@
             appear 1s forwards;
     }
 
-    #mask{
+    #mask_bg{
         display: none;
         background-color: rgba(0, 0, 0, 0.6);
         width: 100vw;
@@ -178,4 +199,8 @@
             visibility: visible;
         }
     }
+
+    #info {
+    display: none;
+  }
 </style>

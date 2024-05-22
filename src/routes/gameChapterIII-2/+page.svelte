@@ -1,10 +1,15 @@
 <script>
   import Header from "../Header.svelte";
+  import Information from "../Information.svelte";
 
   const text1 = ["割", "節", "施"];
   const text2 = ["水", "蛙", "土"];
   const text3 = ["哥", "瓜", "想"];
   let count = [0, 0, 0];
+
+  const info = {
+    text: ["密碼學：反切法", "說明：上字的韻母加下字的聲母和聲調"]
+  };
 
   //   const ans = ["割", "蛙", "瓜"];
 
@@ -27,6 +32,15 @@
     <i class="fa-solid fa-sliders"></i>
   </a>
   <div style="width: 95%;"></div>
+  <a
+    style="color: white;"
+    on:click={() => {
+      // @ts-ignore
+      document.getElementById("info").style.display = "block";
+    }}
+  >
+    <i class="fa-solid fa-circle-question"></i>
+  </a>
   <a href="./" style="color: white;">
     <i class="fa-solid fa-house"></i>
   </a>
@@ -54,8 +68,11 @@
     <button on:click={() => change(2)} class="ansBlock" style="left: 785px;"
       >{text3[count[2]]}</button
     >
-  </div>
 
+    <div id="info">
+      <Information {...info} />
+    </div>
+  </div>
 </section>
 
 <style>
@@ -93,5 +110,9 @@
     font-size: 70px;
     position: absolute;
     top: 503px;
+  }
+
+  #info {
+    display: none;
   }
 </style>
