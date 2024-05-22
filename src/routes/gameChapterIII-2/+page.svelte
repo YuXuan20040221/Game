@@ -5,6 +5,7 @@
   const text2 = ["水", "蛙", "土"];
   const text3 = ["哥", "瓜", "想"];
   let count = [0, 0, 0];
+  let WrongAns = 0;
 
   //   const ans = ["割", "蛙", "瓜"];
 
@@ -15,9 +16,13 @@
 
   function checkAns() {
     if (count[0] == 0 && count[1] == 1 && count[2] == 1) {
+      WrongAns+=1;
+      localStorage.setItem("Ch3Wrong", WrongAns.toString());
       window.location.href = "/gameChapterIII-3";
     } else {
       alert("答錯了QQ");
+      WrongAns+=1;
+      localStorage.setItem("Ch3Wrong", WrongAns.toString());
     }
   }
 </script>

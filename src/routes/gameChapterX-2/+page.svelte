@@ -3,6 +3,7 @@
   var answer = ["朱門", "北", "子"];
   var input = ["", "", ""];
   var text = ["地點", "方位", "時間"];
+  let WrongAns = 0;
 
   function ans() {
     let A = true;
@@ -10,8 +11,13 @@
     for (i = 0; i < 3; i++) {
       if (answer[i] != input[i]) A = false;
     }
-    if (A == false) alert("答案錯誤");
-    else {
+    if (A == false) {
+      alert("答案錯誤");
+      WrongAns+=1;
+      localStorage.setItem("Ch5Wrong", WrongAns.toString());
+    } else {
+      WrongAns+=1;
+      localStorage.setItem("Ch3Wrong", WrongAns.toString());
       window.location.href = "/gameChapterX-3";
     }
   }

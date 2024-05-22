@@ -12,6 +12,7 @@
         "高公子還相覓，",
         "得山中好酒漿。",
     ];
+    let WrongAns = 0;
     function game() {
         // @ts-ignore
         document.getElementById("Game").style.display = "block";
@@ -23,8 +24,13 @@
         for (i = 0; i < 8; i++) {
             if (answer[i] != input[i]) A = false;
         }
-        if (A == false) alert("答案錯誤");
-        else {
+        if (A == false) {
+            alert("答案錯誤");
+            WrongAns += 1;
+            localStorage.setItem("Ch4Wrong", WrongAns.toString());
+        } else {
+            WrongAns += 1;
+            localStorage.setItem("Ch3Wrong", WrongAns.toString());
             window.location.href = "/gameChapterIX-3";
         }
     }
