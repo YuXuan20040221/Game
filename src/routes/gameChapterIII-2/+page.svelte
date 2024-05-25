@@ -8,7 +8,7 @@
   let count = [0, 0, 0];
 
   const info = {
-    text: ["密碼學：反切法", "說明：上字的韻母加下字的聲母和聲調"]
+    text: ["密碼學：反切法", "說明：上字的韻母加下字的聲母和聲調"],
   };
 
   //   const ans = ["割", "蛙", "瓜"];
@@ -59,15 +59,19 @@
     </div>
 
     <button id="lockerButton" on:click={() => checkAns()}>開鎖</button>
-    <button on:click={() => change(0)} class="ansBlock" style="left: 590px;"
-      >{text1[count[0]]}</button
-    >
-    <button on:click={() => change(1)} class="ansBlock" style="left: 687px;"
-      >{text2[count[1]]}</button
-    >
-    <button on:click={() => change(2)} class="ansBlock" style="left: 785px;"
-      >{text3[count[2]]}</button
-    >
+
+    <div id="buttons_container">
+      
+      <button on:click={() => change(0)} class="ansBlock" style="left: 39%;"
+        >{text1[count[0]]}</button
+      >
+      <button on:click={() => change(1)} class="ansBlock" style="left: 45%;"
+        >{text2[count[1]]}</button
+      >
+      <button on:click={() => change(2)} class="ansBlock" style="left: 52%;"
+        >{text3[count[2]]}</button
+      >
+    </div>
 
     <div id="info">
       <Information {...info} />
@@ -86,6 +90,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
+    width: 100%;
+    padding: 20px;
+  }
+
+  #buttons_container{
+    position: absolute;
+    top: 75%;
+    left: 23%;
   }
 
   #lockerButton {
@@ -104,12 +117,12 @@
   #allContainer {
     display: flex;
     align-items: flex-end;
+    position: relative;
   }
 
   .ansBlock {
     font-size: 70px;
-    position: absolute;
-    top: 503px;
+    margin-right: 5px;
   }
 
   #info {
