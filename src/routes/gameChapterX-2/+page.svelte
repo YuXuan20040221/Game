@@ -3,7 +3,7 @@
   var input = ["", "", ""];
   let ans_text = ["", "方", "時"];
 
-  let random = Math.floor(Math.random() * 3) + 1;
+  let random = Math.floor(Math.random() * 3);
   let text = [
     {
       t1: ["夜長(2)，", "風(1)蕭蕭，", "枝頭昏鴉，", "數數(1、2)啼。"],
