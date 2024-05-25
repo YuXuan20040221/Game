@@ -1,30 +1,54 @@
 <script>
+// @ts-nocheck
+
     import Header from "../Header.svelte";
-    const text = [
-        "三人帶著一絲絲的不確定，來到寶藏所在地，",
-        "發現寶藏已被重重機關保護。一旦沒有防備",
-        "地去觸發機關，大家恐怕都要在這個地方喪",
-        "命，此時飛燕大叫了一聲，只見她手裡的密",
-        "信背面，在他的反覆摩擦後竟隱約浮現出一",
-        "行小字，似乎警告著甚麼......"
+    import {onMount} from "svelte"
+    // import 'image-map-resizer';
+
+    function commit(){
+        alert("aaa");
+    }
+
+    /**
+   * @type {HTMLImageElement}
+   */
+    let img;
+    let areas = [
+        // { shape: 'rect', coords: [34, 44, 270, 350], href: 'https://example.com/area1', alt: 'Area 1' },
+        // { shape: 'circle', coords: [337, 300, 44], href: 'https://example.com/area2', alt: 'Area 2' },
+        { shape: 'poly', coords: [330, 380, 340, 380, 360, 380, 380, 370, 410, 370, 430, 370, 450, 370, 480, 370, 500, 370, 530, 380, 550, 380, 570, 390, 550, 400, 520, 400, 500, 400, 480, 410, 440, 410, 410, 410, 380, 400, 350, 400], href: '#', alt: 'Area 3' }
     ];
+    
+    let originalWidth = 0;
+    let originalHeight = 0;
 
-    var animationCompleted = false;
-
-    var input = "";
-
-    var mail_text = "村中無水，皆往古月旁汲，日夜不停";
-
-    function openMail(){
+    function adjustCoords() {
+        const widthRatio = img.clientWidth / originalWidth;
+        const heightRatio = img.clientHeight / originalHeight;
+        
+        areas.forEach(area => {
         // @ts-ignore
-        document.getElementById('mail').style.display = 'block';
-        // @ts-ignore
-        document.getElementById('mask').style.display = 'block';
+        area.adjustedCoords = area.coords.map((coord, index) => 
+            index % 2 === 0 ? coord * widthRatio : coord * heightRatio
+        ).join(',');
+        });
     }
 
-    function closeMail(){
-        window.location.href = "/gameChapterII-2";
-    }
+    onMount(async () => {
+        if(typeof window !== 'undefined'){
+            img = document.getElementById('img');
+            const { default: imageMapResize } = await import('image-map-resizer');
+            imageMapResize();
+
+            img.onload = () => {
+                originalWidth = img.naturalWidth;
+                originalHeight = img.naturalHeight;
+                adjustCoords();
+            };
+
+            window.addEventListener('resize', adjustCoords);
+        }
+    });
 
 </script>
 
@@ -41,45 +65,34 @@
 </Header>
 
 <section>
-    <div id="container">
-        <div id="mask"></div>
-        <div class="typewriter">
-            {#each text as t, i}
-                <p style="animation-delay: {i * 2}s;">
-                    {t}
-                </p>
-            {/each}
-        </div>
-        <button id="mail_but" on:click={openMail}>再次查看密信</button>
-        
-    </div>
-    <div id="mail">
-        <div id="mail_container">
-            <div id="mail_text">
-                {mail_text}
-            </div>
-            <div>
-                <button on:click={closeMail}>收起密信</button>
-            </div>
-        </div>
-    </div>
+    <!-- <div>
+       <img src="/src/lib/images/P2-Map.jpg" usemap="#img_map" id="map" alt="">
+       <map name="img_map">
+            <area shape="polygon" coords="330, 380, 340, 380, 360, 380, 380, 370, 410, 370, 430, 370, 450, 370, 480, 370, 500, 370, 530, 380, 550, 380, 570, 390, 550, 400, 520, 400, 500, 400, 480, 410, 440, 410, 410, 410, 380, 400, 350, 400" href="https://chatgpt.com/?oai-dm=1">
+            <area shape="rect" coords="250, 300, 650, 550" href="https://chatgpt.com/?oai-dm=1">
+       </map>     
+    </div> -->
+
+    <img bind:this={img} id="img" src="/src/lib/images/P2-Map.jpg" usemap="#image-map" alt="Image Map Example" on:load={adjustCoords}>
+
+    <map name="image-map">
+        {#each areas as area}
+            <area shape={area.shape} coords={area.adjustedCoords} href={area.href} alt={area.alt}>
+        {/each}
+    </map>
+ 
 </section>
 
 <style>
-    #container {
-        background-color: rgba(0, 0, 0, 0.6);
-        padding: 60px;
-        z-index: 1;
-    }
+
     section {
-        background-image: url("/src/lib/images/P2-Start.jpg");
-        margin: 0;
-        position: fixed;
-        top: 0;
-        left: 0;
+        /* background-image: url("");
+        background-size: cover; */
+    }
+
+    img {
         width: 100%;
-        height: 100%;
-        z-index: -1;
+        height: auto;
     }
 
     button {
@@ -94,77 +107,12 @@
         outline: none;
     }
 
-    .typewriter p {
-        color: aliceblue;
-        height: 25px;
-        overflow: hidden;
-        font-size: 20px;
-        word-break: break-all;
-        margin: 10px;
-        visibility: hidden;
-        animation:
-            typing 2s steps(40, end),
-            appear 1s forwards;
-    }
 
-    #mask{
-        display: none;
-        background-color: rgba(0, 0, 0, 0.6);
-        width: 100vw;
-        height: 100vh;
-        position: absolute;
+    #map{
+        position: fixed;
         top: 0;
         left: 0;
-        z-index: 2;
-        
+        width: 100vw;
     }
 
-    #mail{
-        display: none;
-        position: absolute;
-        z-index: 3;
-        width: 29%;
-        height: 75%;
-        background-repeat: no-repeat;
-        background-image: url("/src/lib/images/P5-Mail.png");
-    }
-
-    #mail_text{
-        font-size: 15px;
-        font-weight: bold;
-        color: rgba(4, 3, 0, 0.488); 
-
-    }
-
-    #mail_container{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        height: 100%;
-        justify-content: center;
-    }
-
-    #mail_container button{
-        position: relative; 
-        top: 20px;
-        font-size: 15px;
-    }
-
-    /* The typing effect */
-    @keyframes typing {
-        0% {
-            width: 0;
-        }
-        100% {
-            width: 100%;
-        }
-    }
-    @keyframes appear {
-        0% {
-            visibility: hidden;
-        }
-        100% {
-            visibility: visible;
-        }
-    }
 </style>
