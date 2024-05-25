@@ -13,7 +13,9 @@
   const text2 = text[random].t2;
   const text3 = text[random].t3;
   let count = [0, 0, 0];
-  
+  let WrongAns = 0;
+  //   const ans = ["割", "蛙", "瓜"];
+
   // @ts-ignore
   function change(i) {
     count[i] = (count[i] + 1) % 3;
@@ -21,6 +23,8 @@
 
   function checkAns() {
     if (count[0] == 0 && count[1] == 1 && count[2] == 1) {
+      WrongAns+=1;
+      localStorage.setItem("Ch3Wrong", WrongAns.toString());
       window.location.href = "/gameChapterIII-3";
     } else {
       alert("答錯了");

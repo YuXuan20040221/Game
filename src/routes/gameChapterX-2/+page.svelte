@@ -79,15 +79,20 @@
       ans: ["江城", "西", "午"],
     },
   ];
-
+  let WrongAns = 0;
   function ans() {
     let A = true;
     let i = 0;
     for (i = 0; i < 3; i++) {
       if (text[random].ans[i] != input[i]) A = false;
     }
-    if (A == false) alert("答案錯誤");
-    else {
+    if (A == false) {
+      alert("答案錯誤");
+      WrongAns+=1;
+      localStorage.setItem("Ch5Wrong", WrongAns.toString());
+    } else {
+      WrongAns+=1;
+      localStorage.setItem("Ch3Wrong", WrongAns.toString());
       window.location.href = "/gameChapterX-3";
     }
   }

@@ -4,7 +4,7 @@
         "某日，你收到了一封密信，隱藏在背後的那",
         "個人為了考驗你的真實實力，在信中用了一",
         "個特別的加密方式，似乎是在指引了一個神",
-        "秘寶藏的埋藏地點......"
+        "秘寶藏的埋藏地點......",
     ];
 
     let random = Math.floor(Math.random() * 4) + 1;
@@ -16,19 +16,23 @@
     ]
 
     var input = "";
+    let WrongAns = 0;
 
-    function openMail(){
+    function openMail() {
         // @ts-ignore
-        document.getElementById('mail').style.display = 'block';
+        document.getElementById("mail").style.display = "block";
         // @ts-ignore
-        document.getElementById('mask').style.display = 'block';
+        document.getElementById("mask").style.display = "block";
     }
 
     function commit(){
         if(input != mail_text[random].ans){
             alert("答案錯誤!");
-        }
-        else{
+            WrongAns += 1;
+            localStorage.setItem("Ch1Wrong", WrongAns.toString());
+        } else {
+            WrongAns += 1;
+            localStorage.setItem("Ch1Wrong", WrongAns.toString());
             window.location.href = "/gameStart-2";
         }
     }
@@ -55,7 +59,6 @@
             {/each}
         </div>
         <button id="mail_but" on:click={openMail}>打開密信</button>
-        
     </div>
     <div id="mail">
         <div id="mail_container">
@@ -65,7 +68,7 @@
                 {/each}
             </div>
             <div style="display: flex;">
-                <input id="ans" placeholder="請輸入地點" bind:value={input}>
+                <input id="ans" placeholder="請輸入地點" bind:value={input} />
                 <button on:click={commit}>確定</button>
             </div>
         </div>
@@ -96,7 +99,7 @@
         /* width: 80px; */
         padding: 7px 5px;
         font-size: 20px;
-        float: right; 
+        float: right;
         margin: 5px;
         outline: none;
     }
@@ -114,7 +117,7 @@
             appear 1s forwards;
     }
 
-    #mask{
+    #mask {
         display: none;
         background-color: rgba(0, 0, 0, 0.6);
         width: 100vw;
@@ -123,10 +126,9 @@
         top: 0;
         left: 0;
         z-index: 2;
-        
     }
 
-    #mail{
+    #mail {
         display: none;
         position: absolute;
         z-index: 3;
@@ -136,17 +138,17 @@
         background-image: url("src/lib/images/P5-Mail.png");
     }
 
-    #mail_text{
+    #mail_text {
         /* position: relative; */
         /* top: 150px;
         left: 90px; */
         font-size: 25px;
         font-weight: bold;
         color: rgba(4, 3, 0, 0.738);
-        writing-mode: vertical-rl;   
+        writing-mode: vertical-rl;
     }
 
-    #mail_container{
+    #mail_container {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -154,7 +156,7 @@
         justify-content: center;
     }
 
-    #mail_container input{
+    #mail_container input {
         position: relative;
         top: 50px;
         border: transparent;
