@@ -30,7 +30,7 @@
 
 <style>
   section {
-    background-image: url("/src/lib/images/GameStart.png");
+    background-image: url("/src/lib/images/Start.jpg");
   }
 
   .game_start {

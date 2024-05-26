@@ -4,8 +4,8 @@
   let random = Math.floor(Math.random() * 4);
   const text = [
     {t1: ["割", "節", "施"], t2: ["水", "蛙", "土"], t3: ["哥", "瓜", "想"], src: "/src/lib/images/P3-frog.jpg"},
-    {t1: ["喝", "節", "施"], t2: ["水", "我", "土"], t3: ["哥", "火", "想"], src: "/src/lib/images/P3-Flower.jpg"},
-    {t1: ["住", "節", "施"], t2: ["水", "願", "土"], t3: ["哥", "站", "想"], src: "/src/lib/images/P3-Flower.jpg"},
+    {t1: ["喝", "節", "施"], t2: ["水", "我", "土"], t3: ["哥", "火", "想"], src: "/src/lib/images/P3-Drink.png"},
+    {t1: ["住", "節", "施"], t2: ["水", "願", "土"], t3: ["哥", "站", "想"], src: "/src/lib/images/P3-Hospital.jpg"},
     {t1: ["呼", "節", "施"], t2: ["水", "陶", "土"], t3: ["哥", "豪", "想"], src: "/src/lib/images/P3-Flower.jpg"}
 ];
 
