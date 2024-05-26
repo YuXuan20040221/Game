@@ -1,74 +1,120 @@
 <script>
-
     import Header from "../Header.svelte";
-    import {onMount} from 'svelte';
+    import { onMount, onDestroy } from "svelte";
     // import GameChapterII2 from "../gameChapterII-2/+page.svelte"
 
     const random = Math.floor(Math.random() * (2 + 1)); //random Int from 0 to 2
+
     const text = [
         "三人帶著一絲絲的不確定，來到寶藏所在地，",
         "發現寶藏已被重重機關保護。一旦沒有防備",
         "地去觸發機關，大家恐怕都要在這個地方喪",
         "命，此時飛燕大叫了一聲，只見她手裡的密",
         "信背面，在他的反覆摩擦後竟隱約浮現出一",
-        "行小字，似乎警告著甚麼......"
+        "行小字，似乎警告著甚麼......",
     ];
-
 
     var mail_text = [
         "村中無水，皆往古月旁汲，日夜不停",
         "你生的如此高大，是否會感到不便?",
-        "願與君共享今宵月色"
+        "願與君共享今宵月色",
     ];
 
-    function openMail(){
+    function openMail() {
         // @ts-ignore
-        document.getElementById('mail').style.display = 'block';
+        document.getElementById("mail").style.display = "block";
         // @ts-ignore
-        document.getElementById('mask').style.display = 'block';
+        document.getElementById("mask").style.display = "block";
     }
 
-    function closeMail(){
+    function closeMail() {
         // @ts-ignore
-        document.getElementById('Map').style.display = 'block';
+        document.getElementById("Map").style.display = "block";
     }
 
     /**
-   * @type {HTMLImageElement}
-   */
+     * @type {HTMLImageElement}
+     */
     let img;
     let areas = [
-        { shape: 'poly', coords: [210, 290, 210, 650, 260, 640, 300, 640, 300, 270, 260, 280], alt: 'Area 1'},
-        { shape: 'poly', coords: [330, 380, 340, 380, 360, 380, 380, 370, 410, 370, 430, 370, 450, 370, 480, 370, 500, 370, 530, 380, 550, 380, 570, 390, 550, 400, 520, 400, 500, 400, 480, 410, 440, 410, 410, 410, 380, 400, 350, 400], alt: 'Area 2'},
-        { shape: 'poly', coords: [310, 390, 510, 430, 890, 350, 900, 380, 550, 460, 310, 420], alt: 'Area 3'},
+        {
+            shape: "poly",
+            coords: [
+                210, 290, 210, 650, 260, 640, 300, 640, 300, 270, 260, 280,
+            ],
+            alt: "Area 1",
+        },
+        {
+            shape: "poly",
+            coords: [
+                330, 380, 340, 380, 360, 380, 380, 370, 410, 370, 430, 370, 450,
+                370, 480, 370, 500, 370, 530, 380, 550, 380, 570, 390, 550, 400,
+                520, 400, 500, 400, 480, 410, 440, 410, 410, 410, 380, 400, 350,
+                400,
+            ],
+            alt: "Area 2",
+        },
+        {
+            shape: "poly",
+            coords: [
+                310, 390, 510, 430, 890, 350, 900, 380, 550, 460, 310, 420,
+            ],
+            alt: "Area 3",
+        },
     ];
 
-    function handleClick(){
-        alert('aaa');
+    // @ts-ignore
+
+    //這邊我想做讓他每個都可以點，然後點到對的就對了
+    function handleClick(event, area) {
+        if (areas[random] === area) {
+            alert("正確");
+        } else {
+            alert("錯誤");
+        }
+        event.preventDefault();
     }
 
-    let originwidth = 0;
+    let originWidth = 0;
     let originHeight = 0;
-    function adjustCoords(){
+
+    //所以這裡修一下改用each讓他每個都可以調整大小(但我失敗了，幫我)
+    function adjustCoords() {
         let heightRatio = img.clientHeight / originHeight;
-        let widthRatio = img.clientWidth / originwidth;
+        let widthRatio = img.clientWidth / originWidth;
 
-        areas[random].coords = areas[random].coords.map((coord, index) => 
-            index % 2 === 0 ? coord * widthRatio : coord * heightRatio
-        );
+        areas.forEach((area) => {
+            area.coords = area.coords.map((coord, index) =>
+                index % 2 === 0 ? coord * widthRatio : coord * heightRatio,
+            );
+        });
 
-        img.style.display = 'none';
-        img.style.display = 'block';
+        img.style.display = "none";
+        img.style.display = "block";
     }
-    
+
     onMount(() => {
-        originHeight = img.naturalHeight;
-        originwidth = img.naturalWidth;
-        adjustCoords();
+        img.onload = () => {
+            originHeight = img.naturalHeight;
+            originWidth = img.naturalWidth;
+            adjustCoords();
+            window.addEventListener("resize", adjustCoords);
+        };
+    });
+
+    onDestroy(() => {
+        window.removeEventListener("resize", adjustCoords);
     });
 
 
+    //這邊做當滑鼠移到上面就變手手
+    function handleMouseOver() {
+        img.style.cursor = "pointer";
+    }
 
+    function handleMouseOut() {
+        img.style.cursor = "default";
+    }
 </script>
 
 <svelte:head>
@@ -94,7 +140,6 @@
             {/each}
         </div>
         <button id="mail_but" on:click={openMail}>再次查看密信</button>
-        
     </div>
     <div id="mail">
         <div id="mail_container">
@@ -109,13 +154,40 @@
 </section>
 
 <div id="Map">
-    <img bind:this={img} src="/src/lib/images/P2-Map.jpg" usemap="#image-map" alt="Image Map">
+    <img
+        bind:this={img}
+        src="/src/lib/images/P2-Map.jpg"
+        usemap="#image-map"
+        alt="Image Map"
+    />
+
+    <!-- 這個我幹GPT的，可以讓圈起來的地方標顏色 -->
+    <svg
+        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;"
+    >
+        {#each areas as area}
+            <polygon
+                points={area.coords.join(",")}
+                fill="rgba(255, 0, 0, 0.5)"
+                stroke="red"
+                stroke-width="1"
+            />
+        {/each}
+    </svg>
 
     <map name="image-map">
-        <area shape={areas[random].shape} coords={areas[random].coords.join(',')} alt={areas[random].alt} href="/gameChapterII-2">
+        {#each areas as area (area.alt)}
+            <area
+                shape={area.shape}
+                coords={area.coords.join(",")}
+                alt={area.alt}
+                on:click|preventDefault={(event) => handleClick(event, area)}
+                on:mouseover={handleMouseOver}
+                on:mouseout={handleMouseOut}
+            />
+        {/each}
     </map>
 </div>
-
 
 <style>
     #container {
@@ -141,7 +213,7 @@
         /* width: 80px; */
         padding: 7px 5px;
         font-size: 20px;
-        float: right; 
+        float: right;
         margin: 5px;
         outline: none;
     }
@@ -159,7 +231,7 @@
             appear 1s forwards;
     }
 
-    #mask{
+    #mask {
         display: none;
         background-color: rgba(0, 0, 0, 0.6);
         width: 100vw;
@@ -168,10 +240,9 @@
         top: 0;
         left: 0;
         z-index: 2;
-        
     }
 
-    #mail{
+    #mail {
         display: none;
         position: absolute;
         z-index: 3;
@@ -181,14 +252,13 @@
         background-image: url("/src/lib/images/P5-Mail.png");
     }
 
-    #mail_text{
+    #mail_text {
         font-size: 15px;
         font-weight: bold;
-        color: rgba(4, 3, 0, 0.488); 
-
+        color: rgba(4, 3, 0, 0.488);
     }
 
-    #mail_container{
+    #mail_container {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -196,18 +266,17 @@
         justify-content: center;
     }
 
-    #mail_container button{
-        position: relative; 
+    #mail_container button {
+        position: relative;
         top: 20px;
         font-size: 15px;
     }
 
-    #Map{
+    #Map {
         display: none;
-
     }
 
-    #Map img{
+    #Map img {
         width: 100%;
         height: auto;
     }
