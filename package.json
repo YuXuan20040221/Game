@@ -2,8 +2,8 @@
 	"name": "game",
 	"version": "0.0.1",
 	"scripts": {
-		"dev": "vite dev",
-		"build": "vite build",
+		"build": "rollup -c && cp public/app.html public/index.html",
+		"dev": "rollup -c -w",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch"
