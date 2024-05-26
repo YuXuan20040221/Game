@@ -110,7 +110,7 @@
                     <p>{t}</p>
                 {/each}
             </div>
-            <div style="display: flex;">
+            <div id="input_container">
                 <input id="ans" placeholder="請輸入地點" bind:value={input} />
                 <button on:click={commit}>確定</button>
             </div>
@@ -205,13 +205,12 @@
         justify-content: center;
     }
 
-    #mail_container input {
-        position: relative;
-        top: 50px;
-        border: transparent;
-        border-radius: 10px;
-        padding: 10px;
+    #input_container {
+        display: flex;
+        align-items: center;
+        margin-top: 20px;
     }
+
 
     /* The typing effect */
     @keyframes typing {

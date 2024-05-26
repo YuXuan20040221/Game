@@ -81,19 +81,7 @@
   <a href="./" style="color: white;">
     <i class="fa-solid fa-house"></i>
   </a>
-    <a href="/gameMenu" style="color: white;">
-    <i class="fa-solid fa-sliders"></i>
-  </a>
-  <div style="width: 95%;"></div>
-  <a
-    style="color: white;margin-right: 15px;"
-    on:click= {toggleInfo}
-  >
-    <i class="fa-solid fa-circle-question"></i>
-  </a>
-  <a href="./" style="color: white;">
-    <i class="fa-solid fa-house"></i>
-  </a>
+
 </Header>
 
 <section>
