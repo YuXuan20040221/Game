@@ -28,6 +28,8 @@
       window.location.href = "/gameChapterIII-3";
     } else {
       alert("答錯了");
+      WrongAns+=1;
+      localStorage.setItem("Ch3Wrong", WrongAns.toString());
     }
   }
 

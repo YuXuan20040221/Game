@@ -9,11 +9,25 @@
 
     let random = Math.floor(Math.random() * 4) + 1;
     const mail_text = [
-        {t: ["樺樹林裡無木，", "木在田中，", "閒人窗紗掩月，", "取刀一剪。"], ans: "華東門前"},
-        {t: ["冬月江畔鳥翩躚，", "士兵途經寸難移。"], ans: "青鴻寺"},
-        {t: ["雨後山水昏如睡，", "明日鬱結盼出走，", "門中俠客帽欲摘，", "放眼天地任遨遊。"], ans: "雪月閣"},
-        {t: ["牛角上綁刀，", "離人心上秋燈閃閃人兒不見，", "悶昏昏笑話無心"], ans: "解愁門"}
-    ]
+        {
+            t: ["樺樹林裡無木，", "木在田中，", "閒人窗紗掩月，", "取刀一剪。"],
+            ans: "華東門前",
+        },
+        { t: ["冬月江畔鳥翩躚，", "士兵途經寸難移。"], ans: "青鴻寺" },
+        {
+            t: [
+                "雨後山水昏如睡，",
+                "明日鬱結盼出走，",
+                "門中俠客帽欲摘，",
+                "放眼天地任遨遊。",
+            ],
+            ans: "雪月閣",
+        },
+        {
+            t: ["牛角上綁刀，", "離人心上秋燈閃閃人兒不見，", "悶昏昏笑話無心"],
+            ans: "解愁門",
+        },
+    ];
 
     var input = "";
     let WrongAns = 0;
@@ -25,8 +39,8 @@
         document.getElementById("mask").style.display = "block";
     }
 
-    function commit(){
-        if(input != mail_text[random].ans){
+    function commit() {
+        if (input != mail_text[random].ans) {
             alert("答案錯誤!");
             WrongAns += 1;
             localStorage.setItem("Ch1Wrong", WrongAns.toString());

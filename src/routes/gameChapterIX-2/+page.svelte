@@ -49,7 +49,7 @@
             localStorage.setItem("Ch4Wrong", WrongAns.toString());
         } else {
             WrongAns += 1;
-            localStorage.setItem("Ch3Wrong", WrongAns.toString());
+            localStorage.setItem("Ch4Wrong", WrongAns.toString());
             window.location.href = "/gameChapterIX-3";
         }
     }

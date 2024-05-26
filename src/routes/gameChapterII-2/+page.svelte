@@ -6,7 +6,7 @@
         "地去觸發機關，大家恐怕都要在這個地方喪",
         "命，此時飛燕大叫了一聲，只見她手裡的密",
         "信背面，在他的反覆摩擦後竟隱約浮現出一",
-        "行小字，似乎警告著甚麼......"
+        "行小字，似乎警告著甚麼......",
     ];
 
     var animationCompleted = false;
@@ -17,20 +17,19 @@
         "村中無水，皆往古月旁汲，日夜不停",
         "春日遊，百花盛開，蝴蝶飛舞",
         "你生的如此高大，是否會感到不便?",
-        "願與君共享今宵月色"
-    ]
-    
-    function openMail(){
+        "願與君共享今宵月色",
+    ];
+
+    function openMail() {
         // @ts-ignore
-        document.getElementById('mail').style.display = 'block';
+        document.getElementById("mail").style.display = "block";
         // @ts-ignore
-        document.getElementById('mask').style.display = 'block';
+        document.getElementById("mask").style.display = "block";
     }
 
-    function closeMail(){
+    function closeMail() {
         window.location.href = "/gameChapterII-2";
     }
-
 </script>
 
 <svelte:head>
@@ -56,7 +55,6 @@
             {/each}
         </div>
         <button id="mail_but" on:click={openMail}>再次查看密信</button>
-        
     </div>
     <div id="mail">
         <div id="mail_container">
@@ -94,7 +92,7 @@
         /* width: 80px; */
         padding: 7px 5px;
         font-size: 20px;
-        float: right; 
+        float: right;
         margin: 5px;
         outline: none;
     }
@@ -112,7 +110,7 @@
             appear 1s forwards;
     }
 
-    #mask{
+    #mask {
         display: none;
         background-color: rgba(0, 0, 0, 0.6);
         width: 100vw;
@@ -121,10 +119,9 @@
         top: 0;
         left: 0;
         z-index: 2;
-        
     }
 
-    #mail{
+    #mail {
         display: none;
         position: absolute;
         z-index: 3;
@@ -134,14 +131,13 @@
         background-image: url("/src/lib/images/P5-Mail.png");
     }
 
-    #mail_text{
+    #mail_text {
         font-size: 15px;
         font-weight: bold;
-        color: rgba(4, 3, 0, 0.488); 
-
+        color: rgba(4, 3, 0, 0.488);
     }
 
-    #mail_container{
+    #mail_container {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -149,8 +145,8 @@
         justify-content: center;
     }
 
-    #mail_container button{
-        position: relative; 
+    #mail_container button {
+        position: relative;
         top: 20px;
         font-size: 15px;
     }
