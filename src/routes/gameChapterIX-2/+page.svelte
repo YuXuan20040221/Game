@@ -110,7 +110,7 @@
     width: 60%;
     display: none;
     background-color: rgba(0, 0, 0, 0.7);
-    z-index: 1;
+    z-index: 0;
     position: absolute;
     text-align: center;
   }
