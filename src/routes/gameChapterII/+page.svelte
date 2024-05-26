@@ -70,7 +70,7 @@
   </a>
   <div style="width: 95%;"></div>
   <a
-    style="color: white;margin-right: 5px;"
+    style="color: white;margin-right: 15px;"
     on:click= {toggleInfo}
   >
     <i class="fa-solid fa-circle-question"></i>
