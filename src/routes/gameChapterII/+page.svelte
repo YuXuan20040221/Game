@@ -1,8 +1,6 @@
 <script>
-
     import Header from "../Header.svelte";
     import {onMount} from 'svelte';
-    // import GameChapterII2 from "../gameChapterII-2/+page.svelte"
 
     const random = Math.floor(Math.random() * (2 + 1)); //random Int from 0 to 2
     const text = [
@@ -31,6 +29,8 @@
     function closeMail(){
         // @ts-ignore
         document.getElementById('Map').style.display = 'block';
+        img.style.display = 'none';
+        img.style.display = 'block';
     }
 
     /**
@@ -106,6 +106,8 @@
             </div>
         </div>
     </div>
+
+    
 </section>
 
 <div id="Map">
