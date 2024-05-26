@@ -18,7 +18,7 @@
         <a href="/gameMenu" style="color:cornflowerblue;">遊戲選單</a>
       </div>
       <div id="game_start">
-        <a href="/gameEnd" style="color:white;">開始遊戲</a>
+        <a href="/gameStart-0" style="color:white;">開始遊戲</a>
       </div>
     </div>
   </div>

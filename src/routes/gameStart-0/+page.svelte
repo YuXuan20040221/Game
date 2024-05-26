@@ -13,7 +13,7 @@
 
 <section>
   <video autoplay style="width:95%;" id="video">
-    <source src="/src/lib/images/GameEnd.mp4" type="video/mp4" />
+    <source src="/src/lib/images/GameStart.mp4" type="video/mp4" />
     <track
       kind="captions"
       src="captions.vtt"
@@ -24,7 +24,7 @@
     <!-- 字幕 -->
   </video>
   <div class="game_start">
-    <a href="./" style="color:white;">遊戲結束</a>
+    <a href="/gameStart" style="color:white;">第一關</a>
   </div>
 </section>
 
@@ -32,6 +32,7 @@
   section {
     background-image: url("/src/lib/images/GameStart.png");
   }
+
   .game_start {
     top: 5%;
     left: 80%;
