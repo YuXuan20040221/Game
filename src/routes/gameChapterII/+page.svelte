@@ -1,5 +1,6 @@
 <script>
     import Header from "../Header.svelte";
+    import Information from "../Information.svelte";
 
     const random = Math.floor(Math.random() * (2 + 1)); //random Int from 0 to 2
     const text = [
@@ -10,6 +11,19 @@
         "信背面，在他的反覆摩擦後竟隱約浮現出一",
         "行小字，似乎警告著甚麼......",
     ];
+
+    const info = {
+        text: ["密碼學：隱語法", 
+            "說明：隱語也稱暗語，是把秘密信息變換成字面上有一定意義，但與該信息完全無關的話語，",
+            "是一種沿用時間很長、應用範圍很廣的自然語言加密方法。" ,
+            "《左傳·宣公十二年》中記載，春秋時楚子欲攻打蕭國，蕭國大夫還無社向楚國大夫申叔展求救。",
+            "申叔展用隱語問還無社：「你有麥粷嗎？」，還無社答：「沒有。」申叔展又問：「你有山鞠窮",
+            "嗎？」還無社仍答：「沒有。」麥粷和山鞠窮是兩種防治風溫的中草藥，申叔展用這兩種藥名做",
+            "隱語，暗指水坑水井，暗示還無社在戰鬥中身藏水井裡。申叔展見還無社沒有領會隱語的含義，",
+            "便進一步暗示：「你得了風濕病怎麼辦？」還無社這才將隱語與水井聯繫起來，明白了申叔展的",
+            "意思。次日，蕭國戰敗，申叔展救出了藏匿在廢水井中的還無社。"]
+    };
+
 
     var mail_text = [
         "村中無水，皆往古月旁汲，日夜不停",
@@ -36,6 +50,16 @@
         localStorage.setItem("Ch2Wrong", WrongAns.toString());
         window.location.href = "/gameChapterII-2";
     }
+
+    let showInfo = false;
+    function toggleInfo(){
+        showInfo = true;
+    }
+
+    function closeInfo(){
+        showInfo = false;
+    }
+
 </script>
 
 <svelte:head>
@@ -43,16 +67,24 @@
     <meta name="cover" content="cover of game" />
 </svelte:head>
 <Header>
-    <a href="./" style="color: azure;">
-        <i class="fa-solid fa-sliders"></i>
-    </a>
-    <div style="width: 95%;"></div>
-    <a href="./" style="color: azure;"><i class="fa-solid fa-house"></i></a>
+    <a href="/gameMenu" style="color: white;">
+    <i class="fa-solid fa-sliders"></i>
+  </a>
+  <div style="width: 95%;"></div>
+  <a
+    style="color: white;margin-right: 15px;"
+    on:click= {toggleInfo}
+  >
+    <i class="fa-solid fa-circle-question"></i>
+  </a>
+  <a href="./" style="color: white;">
+    <i class="fa-solid fa-house"></i>
+  </a>
 </Header>
 
 <section>
     <div id="container">
-        <div id="mask"></div>
+        <div id="mask_bg"></div>
         <div class="typewriter">
             {#each text as t, i}
                 <p style="animation-delay: {i * 2}s;">
@@ -78,14 +110,13 @@
     <img src="/src/lib/images/P2-Map.jpg" usemap="#image-map" alt="Image Map" />
 
     <button id="button{random}" on:click={handleClick}></button>
-    <!-- <button id="button1" on:click={handleClick}></button>
-    <button id="button2" on:click={handleClick}></button> -->
-
-    <!-- <map name="image-map">
-        <area shape={areas[random].shape} coords={areas[random].coords.join(',')} alt={areas[random].alt} href="/gameChapterII-2">
-    </map> -->
 </div>
 
+{#if showInfo}
+    <div id="info">
+        <Information {...info} close={closeInfo}/>
+    </div>
+{/if}
 <style>
     #container {
         background-color: rgba(0, 0, 0, 0.6);
@@ -128,7 +159,7 @@
             appear 1s forwards;
     }
 
-    #mask {
+    #mask_bg{
         display: none;
         background-color: rgba(0, 0, 0, 0.6);
         width: 100vw;
@@ -211,6 +242,7 @@
         background-color: transparent;
         border: 0 transparent;
     }
+
 
     /* The typing effect */
     @keyframes typing {

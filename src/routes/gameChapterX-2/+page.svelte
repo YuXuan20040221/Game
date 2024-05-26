@@ -1,5 +1,7 @@
 <script>
   import Header from "../Header.svelte";
+  import Information from "../Information.svelte";
+  var answer = ["朱門", "北", "子"];
   var input = ["", "", ""];
   let ans_text = ["", "方", "時"];
 
@@ -79,6 +81,22 @@
       ans: ["江城", "西", "午"],
     },
   ];
+  const info = {
+    text: ["密碼學：字驗",
+        "說明：中國軍隊第一本真正的軍事通信密碼本《武經總要．字驗》中，紀錄字驗",
+        "的用法，在這本書中用一首五言律詩的40個漢字，分别代表40種情況和要求。",
+        "假設雙方以唐代王勃的《送杜少府之任蜀川》「城闕輔三秦，風煙望五津。與君",
+        "離别意，同是宦游人。海内存知己，天涯若比鄰。無為在歧路，兒女共沾巾」。",
+        "作為解碼密鑰。如果軍隊在戰鬥在糧食將盡，需要補充，前方將領就從密碼本中",
+        "查出「請糧料」的編碼，假如是第九，而《送杜少府之任蜀川》中的第九字是「五」，",
+        "於是請糧將領就將「五」字寫到一件普通公文書碟之中，並在字上加蓋印章。指",
+        "揮機關接到這份公文後，查出蓋印章的「五」字，得知「五」字在臨時約好的詩",
+        "中列第九，再對照密碼本上的順序，就得知了前方的情報先鋒官得令後默念一遍",
+        "詩歌，即可從「戲」中數出命令號碼了。",
+        "提示：由題目找到劃記的字是第幾個字，再對應字驗該字在第幾個，",
+        "最後可得到對照表對應的第幾行第幾字，即可找出XX地點的X方，X時集合"]
+  };
+
   let WrongAns = 0;
   function ans() {
     let A = true;
@@ -96,6 +114,15 @@
       window.location.href = "/gameChapterX-3";
     }
   }
+
+  let showInfo = false;
+    function toggleInfo(){
+        showInfo = true;
+    }
+
+    function closeInfo(){
+        showInfo = false;
+    }
 </script>
 
 <Header>
@@ -103,13 +130,19 @@
     <i class="fa-solid fa-sliders"></i>
   </a>
   <div style="width: 95%;"></div>
+  <a
+    style="color: white;margin-right: 15px;"
+    on:click= {toggleInfo}
+  >
+    <i class="fa-solid fa-circle-question"></i>
+  </a>
   <a href="./" style="color: white;">
     <i class="fa-solid fa-house"></i>
   </a>
 </Header>
 
 <section>
-  <div id="mask"></div>
+  <div id="mask_bg"></div>
 
   <div class="container">
     <div class="bg_mail">
@@ -146,7 +179,15 @@
     {/each}
     <button class="lock" on:click={ans}> 驗證 </button>
   </div>
+
+  
 </section>
+
+{#if showInfo}
+  <div id="info">
+      <Information {...info} close={closeInfo}/>
+  </div>
+{/if}
 
 <style>
   section {
@@ -161,7 +202,7 @@
     display: flex;
   }
 
-  #mask {
+  #mask_bg {
     background-color: rgba(0, 0, 0, 0.6);
     position: absolute;
     left: 0;
@@ -202,4 +243,5 @@
     justify-content: center;
     align-items: center;
   }
+
 </style>
