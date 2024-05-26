@@ -46,16 +46,15 @@
       localStorage.setItem("Ch3Wrong", WrongAns.toString());
     }
   }
-
   let showInfo = false;
   function toggleInfo(){
       showInfo = true;
   }
 
+
   function closeInfo(){
       showInfo = false;
   }
-
   
 </script>
 

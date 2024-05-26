@@ -137,12 +137,19 @@ let WrongAns = 0;
   >
     <i class="fa-solid fa-circle-question"></i>
   </a>
+  <a
+    style="color: white;margin-right: 15px;"
+    on:click= {toggleInfo}
+  >
+    <i class="fa-solid fa-circle-question"></i>
+  </a>
   <a href="./" style="color: white;">
     <i class="fa-solid fa-house"></i>
   </a>
 </Header>
 
 <section>
+  <div id="mask_bg"></div>
   <div id="mask_bg"></div>
 
   <div class="container">
@@ -182,7 +189,15 @@ let WrongAns = 0;
   </div>
 
   
+
+  
 </section>
+
+{#if showInfo}
+  <div id="info">
+      <Information {...info} close={closeInfo}/>
+  </div>
+{/if}
 
 {#if showInfo}
   <div id="info">
@@ -244,5 +259,6 @@ let WrongAns = 0;
     justify-content: center;
     align-items: center;
   }
+
 
 </style>

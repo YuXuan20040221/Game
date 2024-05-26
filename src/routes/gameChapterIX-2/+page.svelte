@@ -81,6 +81,8 @@
 <svelte:head>
   <title>Game</title>
   <meta name="cover" content="cover of game" />
+  <title>Game</title>
+  <meta name="cover" content="cover of game" />
 </svelte:head>
 <Header>
   <a href="/gameMenu" style="color: azure;">
@@ -120,7 +122,19 @@
   section {
     background-image: url("/src/lib/images/P4-Box2.jpg");
   }
+  section {
+    background-image: url("/src/lib/images/P4-Box2.jpg");
+  }
 
+  .lock {
+    color: azure;
+    background-color: cornflowerblue;
+    border-radius: 50px;
+    width: 150px;
+    padding: 10px;
+    font-size: 20px;
+    margin: 5px;
+  }
   .lock {
     color: azure;
     background-color: cornflowerblue;

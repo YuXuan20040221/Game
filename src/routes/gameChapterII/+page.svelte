@@ -60,6 +60,7 @@
         showInfo = false;
     }
 
+
 </script>
 
 <svelte:head>
@@ -80,10 +81,24 @@
   <a href="./" style="color: white;">
     <i class="fa-solid fa-house"></i>
   </a>
+    <a href="/gameMenu" style="color: white;">
+    <i class="fa-solid fa-sliders"></i>
+  </a>
+  <div style="width: 95%;"></div>
+  <a
+    style="color: white;margin-right: 15px;"
+    on:click= {toggleInfo}
+  >
+    <i class="fa-solid fa-circle-question"></i>
+  </a>
+  <a href="./" style="color: white;">
+    <i class="fa-solid fa-house"></i>
+  </a>
 </Header>
 
 <section>
     <div id="container">
+        <div id="mask_bg"></div>
         <div id="mask_bg"></div>
         <div class="typewriter">
             {#each text as t, i}
@@ -160,7 +175,7 @@
             appear 1s forwards;
     }
 
-    #mask {
+    #mask_bg{
         display: none;
         background-color: rgba(0, 0, 0, 0.6);
         width: 100vw;
@@ -243,6 +258,7 @@
         background-color: transparent;
         border: 0 transparent;
     }
+
 
 
     /* The typing effect */
