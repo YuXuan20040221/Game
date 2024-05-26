@@ -2,53 +2,43 @@
 // @ts-nocheck
 
     import Header from "../Header.svelte";
-    import {onMount} from "svelte"
-    // import 'image-map-resizer';
-
-    function commit(){
-        alert("aaa");
-    }
+    import {onMount} from 'svelte';
+    export let random;
 
     /**
    * @type {HTMLImageElement}
    */
     let img;
     let areas = [
-        // { shape: 'rect', coords: [34, 44, 270, 350], href: 'https://example.com/area1', alt: 'Area 1' },
-        // { shape: 'circle', coords: [337, 300, 44], href: 'https://example.com/area2', alt: 'Area 2' },
-        { shape: 'poly', coords: [330, 380, 340, 380, 360, 380, 380, 370, 410, 370, 430, 370, 450, 370, 480, 370, 500, 370, 530, 380, 550, 380, 570, 390, 550, 400, 520, 400, 500, 400, 480, 410, 440, 410, 410, 410, 380, 400, 350, 400], href: '#', alt: 'Area 3' }
+        { shape: 'poly', coords: [210, 290, 210, 650, 260, 640, 300, 640, 300, 270, 260, 280], alt: 'Area 1'},
+        { shape: 'poly', coords: [330, 380, 340, 380, 360, 380, 380, 370, 410, 370, 430, 370, 450, 370, 480, 370, 500, 370, 530, 380, 550, 380, 570, 390, 550, 400, 520, 400, 500, 400, 480, 410, 440, 410, 410, 410, 380, 400, 350, 400], alt: 'Area 2'},
+        { shape: 'poly', coords: [310, 390, 510, 430, 890, 350, 900, 380, 550, 460, 310, 420], alt: 'Area 3'},
     ];
-    
-    let originalWidth = 0;
-    let originalHeight = 0;
 
-    function adjustCoords() {
-        const widthRatio = img.clientWidth / originalWidth;
-        const heightRatio = img.clientHeight / originalHeight;
-        
-        areas.forEach(area => {
-        // @ts-ignore
-        area.adjustedCoords = area.coords.map((coord, index) => 
-            index % 2 === 0 ? coord * widthRatio : coord * heightRatio
-        ).join(',');
-        });
+    function handleClick(){
+        alert('aaa');
     }
 
-    onMount(async () => {
-        if(typeof window !== 'undefined'){
-            img = document.getElementById('img');
-            const { default: imageMapResize } = await import('image-map-resizer');
-            imageMapResize();
+    let originwidth = 0;
+    let originHeight = 0;
+    function adjustCoords(){
+        let heightRatio = img.clientHeight / originHeight;
+        let widthRatio = img.clientWidth / originwidth;
 
-            img.onload = () => {
-                originalWidth = img.naturalWidth;
-                originalHeight = img.naturalHeight;
-                adjustCoords();
-            };
+        areas[random].coords = areas[random].coords.map((coord, index) => 
+            index % 2 === 0 ? coord * widthRatio : coord * heightRatio
+        ).join(',');
 
-            window.addEventListener('resize', adjustCoords);
-        }
+        img.style.display = 'none';
+        img.style.display = 'block';
+    }
+    
+    onMount(() => {
+        originHeight = img.naturalHeight;
+        originwidth = img.naturalWidth;
+        adjustCoords();
     });
+
 
 </script>
 
@@ -65,54 +55,21 @@
 </Header>
 
 <section>
-    <!-- <div>
-       <img src="/src/lib/images/P2-Map.jpg" usemap="#img_map" id="map" alt="">
-       <map name="img_map">
-            <area shape="polygon" coords="330, 380, 340, 380, 360, 380, 380, 370, 410, 370, 430, 370, 450, 370, 480, 370, 500, 370, 530, 380, 550, 380, 570, 390, 550, 400, 520, 400, 500, 400, 480, 410, 440, 410, 410, 410, 380, 400, 350, 400" href="https://chatgpt.com/?oai-dm=1">
-            <area shape="rect" coords="250, 300, 650, 550" href="https://chatgpt.com/?oai-dm=1">
-       </map>     
-    </div> -->
 
-    <img bind:this={img} id="img" src="/src/lib/images/P2-Map.jpg" usemap="#image-map" alt="Image Map Example" on:load={adjustCoords}>
+    <img bind:this={img} src="/src/lib/images/P2-Map.jpg" usemap="#image-map" alt="Image Map">
 
-    <map name="image-map">
-        {#each areas as area}
-            <area shape={area.shape} coords={area.adjustedCoords} href={area.href} alt={area.alt}>
-        {/each}
+    <map name="image-map" on:click|preventDefault={handleClick}>
+        <area shape={areas[random].shape} coords={areas[random].coords} alt={areas[random].alt}>
     </map>
  
 </section>
 
 <style>
 
-    section {
-        /* background-image: url("");
-        background-size: cover; */
-    }
-
     img {
         width: 100%;
         height: auto;
     }
 
-    button {
-        color: azure;
-        background-color: cornflowerblue;
-        border-radius: 10px;
-        /* width: 80px; */
-        padding: 7px 5px;
-        font-size: 20px;
-        float: right; 
-        margin: 5px;
-        outline: none;
-    }
-
-
-    #map{
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-    }
 
 </style>
