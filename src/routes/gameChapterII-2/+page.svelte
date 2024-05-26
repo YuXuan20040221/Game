@@ -1,5 +1,6 @@
 <script>
     import Anime from "../Anime.svelte";
+    
     const anm = {
       text: [
         "按照密信裡給予的線索險象環生的躲過了陷阱，",
