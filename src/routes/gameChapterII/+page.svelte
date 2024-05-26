@@ -1,7 +1,6 @@
 <script>
     import Header from "../Header.svelte";
     import { onMount, onDestroy } from "svelte";
-    // import GameChapterII2 from "../gameChapterII-2/+page.svelte"
 
     const random = Math.floor(Math.random() * (2 + 1)); //random Int from 0 to 2
 
