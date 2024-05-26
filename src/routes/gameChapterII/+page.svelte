@@ -1,6 +1,5 @@
 <script>
     import Header from "../Header.svelte";
-    import {onMount} from 'svelte';
 
     const random = Math.floor(Math.random() * (2 + 1)); //random Int from 0 to 2
     const text = [
@@ -29,43 +28,14 @@
     function closeMail(){
         // @ts-ignore
         document.getElementById('Map').style.display = 'block';
-        img.style.display = 'none';
-        img.style.display = 'block';
+
     }
 
-    /**
-   * @type {HTMLImageElement}
-   */
-    let img;
-    let areas = [
-        { shape: 'poly', coords: [210, 290, 210, 650, 260, 640, 300, 640, 300, 270, 260, 280], alt: 'Area 1'},
-        { shape: 'poly', coords: [330, 380, 340, 380, 360, 380, 380, 370, 410, 370, 430, 370, 450, 370, 480, 370, 500, 370, 530, 380, 550, 380, 570, 390, 550, 400, 520, 400, 500, 400, 480, 410, 440, 410, 410, 410, 380, 400, 350, 400], alt: 'Area 2'},
-        { shape: 'poly', coords: [310, 390, 510, 430, 890, 350, 900, 380, 550, 460, 310, 420], alt: 'Area 3'},
-    ];
 
     function handleClick(){
-        alert('aaa');
+        window.location.href = ('/gameChapterII-2');
     }
 
-    let originwidth = 0;
-    let originHeight = 0;
-    function adjustCoords(){
-        let heightRatio = img.clientHeight / originHeight;
-        let widthRatio = img.clientWidth / originwidth;
-
-        areas[random].coords = areas[random].coords.map((coord, index) => 
-            index % 2 === 0 ? coord * widthRatio : coord * heightRatio
-        );
-
-        img.style.display = 'none';
-        img.style.display = 'block';
-    }
-    
-    onMount(() => {
-        originHeight = img.naturalHeight;
-        originwidth = img.naturalWidth;
-        adjustCoords();
-    });
 
 
 
@@ -111,11 +81,15 @@
 </section>
 
 <div id="Map">
-    <img bind:this={img} src="/src/lib/images/P2-Map.jpg" usemap="#image-map" alt="Image Map">
+    <img src="/src/lib/images/P2-Map.jpg" usemap="#image-map" alt="Image Map">
 
-    <map name="image-map">
+    <button id="button{random}" on:click={handleClick}></button>
+    <!-- <button id="button1" on:click={handleClick}></button>
+    <button id="button2" on:click={handleClick}></button> -->
+
+    <!-- <map name="image-map">
         <area shape={areas[random].shape} coords={areas[random].coords.join(',')} alt={areas[random].alt} href="/gameChapterII-2">
-    </map>
+    </map> -->
 </div>
 
 
@@ -206,12 +180,45 @@
 
     #Map{
         display: none;
-
     }
 
     #Map img{
+        position: fixed;
         width: 100%;
-        height: auto;
+        height: 100%;
+        z-index: 2;
+    }
+
+    #button0{
+        position: absolute;
+        top: 63%;
+        right: 43%;
+        width: 25%;
+        height: 7%;
+        z-index: 5;
+        background-color: transparent;
+        border: 0 transparent;
+    }
+
+    #button1{
+        position: absolute;
+        right: 70%;
+        width: 10%;
+        height: 70%;
+        z-index: 5;
+        background-color: transparent;
+        border: 0 transparent;
+    }
+
+    #button2{
+        position: absolute;
+        top: 10%;
+        right: 0%;
+        width: 70%;
+        height: 10%;
+        z-index: 5;
+        background-color: transparent;
+        border: 0 transparent;
     }
 
     /* The typing effect */
