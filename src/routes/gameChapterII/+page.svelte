@@ -25,38 +25,39 @@
         // @ts-ignore
         document.getElementById("mask").style.display = "block";
     }
-
+    /**
+   * @type {{ style: { display: string; }; }}
+   */
+    let section;
     function closeMail() {
         // @ts-ignore
         document.getElementById("Map").style.display = "block";
+        section.style.display = 'none';
     }
 
     /**
      * @type {HTMLImageElement}
      */
-    let img;
+    let image;
     let areas = [
         {
-            shape: "poly",
+            shape: "rect",
             coords: [
-                210, 290, 210, 650, 260, 640, 300, 640, 300, 270, 260, 280,
+                320, 370, 570, 400
             ],
             alt: "Area 1",
         },
         {
-            shape: "poly",
+            shape: "rect",
             coords: [
-                330, 380, 340, 380, 360, 380, 380, 370, 410, 370, 430, 370, 450,
-                370, 480, 370, 500, 370, 530, 380, 550, 380, 570, 390, 550, 400,
-                520, 400, 500, 400, 480, 410, 440, 410, 410, 410, 380, 400, 350,
-                400,
+                220, 10, 300, 390
             ],
             alt: "Area 2",
         },
         {
-            shape: "poly",
+            shape: "rect",
             coords: [
-                310, 390, 510, 430, 890, 350, 900, 380, 550, 460, 310, 420,
+                300, 0, 880, 80
             ],
             alt: "Area 3",
         },
@@ -74,46 +75,53 @@
         event.preventDefault();
     }
 
-    let originWidth = 0;
-    let originHeight = 0;
-
     //所以這裡修一下改用each讓他每個都可以調整大小(但我失敗了，幫我)
-    function adjustCoords() {
-        let heightRatio = img.clientHeight / originHeight;
-        let widthRatio = img.clientWidth / originWidth;
 
-        areas.forEach((area) => {
-            area.coords = area.coords.map((coord, index) =>
-                index % 2 === 0 ? coord * widthRatio : coord * heightRatio,
-            );
-        });
+    // image.onload = function() {
+    //     // let heightRatio = img.clientHeight / originHeight;
+    //     let widthRatio = image.clientWidth / image.width;
 
-        img.style.display = "none";
-        img.style.display = "block";
+    //     for(var i = 0; i < areas.length; i++){
+    //         for(var j = 0; j < areas[i].coords.length; j++){
+    //             areas[i].coords[j] *= widthRatio;
+    //         }
+    //     }
+    // }
+    let windowWidth = 0;
+    let temp = areas;
+    function adjustAreaCoords() {
+        let widthRatio = windowWidth / image.naturalWidth;
+
+        for(var i = 0; i < areas.length; i++){
+            for(var j = 0; j < areas[i].coords.length; j += 2){
+                areas[i].coords[j] = temp[i].coords[j] * widthRatio;
+            }
+        }
+        image.style.display = 'none';
+        image.style.display = 'block';
     }
-
+    
     onMount(() => {
-        img.onload = () => {
-            originHeight = img.naturalHeight;
-            originWidth = img.naturalWidth;
-            adjustCoords();
-            window.addEventListener("resize", adjustCoords);
-        };
+        // image.onload = () => {
+        //     windowWidth = window.innerWidth;
+        //     windowHeight = window.innerHeight;
+        //     adjustAreaCoords();
+        // };
+        if (typeof window !== 'undefined') {
+            windowWidth = window.innerWidth;
+
+            const handleResize = () => {
+                windowWidth = window.innerWidth;
+
+                adjustAreaCoords();
+            };
+
+            window.addEventListener('resize', handleResize);
+
+        }
     });
 
-    onDestroy(() => {
-        window.removeEventListener("resize", adjustCoords);
-    });
 
-
-    //這邊做當滑鼠移到上面就變手手
-    function handleMouseOver() {
-        img.style.cursor = "pointer";
-    }
-
-    function handleMouseOut() {
-        img.style.cursor = "default";
-    }
 </script>
 
 <svelte:head>
@@ -128,7 +136,7 @@
     <a href="./" style="color: azure;"><i class="fa-solid fa-house"></i></a>
 </Header>
 
-<section>
+<section bind:this={section}>
     <div id="container">
         <div id="mask"></div>
         <div class="typewriter">
@@ -154,12 +162,12 @@
 
 <div id="Map">
     <img
-        bind:this={img}
-        src="/src/lib/images/P2-Map.jpg"
-        usemap="#image-map"
-        alt="Image Map"
+            bind:this={image}
+            src="/src/lib/images/P2-Map.jpg"
+            usemap="#image-map"
+            alt="Image Map"
     />
-
+    
     <!-- 這個我幹GPT的，可以讓圈起來的地方標顏色 -->
     <svg
         style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;"
@@ -181,12 +189,22 @@
                 coords={area.coords.join(",")}
                 alt={area.alt}
                 on:click|preventDefault={(event) => handleClick(event, area)}
-                on:mouseover={handleMouseOver}
-                on:mouseout={handleMouseOut}
+
             />
         {/each}
     </map>
 </div>
+
+<map name="image-map" id="Map">
+    {#each areas as area (area.alt)}
+        <area
+            shape={area.shape}
+            coords={area.coords.join(",")}
+            alt={area.alt}
+            on:click|preventDefault={(event) => handleClick(event, area)}
+        />
+    {/each}
+</map>
 
 <style>
     #container {
@@ -276,6 +294,7 @@
     }
 
     #Map img {
+        /* position: fixed; */
         width: 100%;
         height: auto;
     }
